@@ -1,0 +1,37 @@
+<nz-spin *ngIf="loading" class="w-full h-full flex justify-center items-center"></nz-spin>
+
+<nz-table
+  *ngIf="!loading"
+  #basicTable
+  [nzBordered]="true"
+  [nzScroll]="{ x: '1100px' }"
+  [nzData]="posts"
+  [nzPageSize]="10"
+  [nzFrontPagination]="true"
+  [nzShowPagination]="true"
+  nzShowSizeChanger="false"
+>
+  <thead>
+    <tr>
+      <th>Author</th>
+      <th>Title</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let post of basicTable.data">
+      <td>{{ post.userName }}</td>
+      <td>{{ post.title }}</td>
+      <td>
+        <button
+          nz-button
+          nzType="primary"
+          (click)="openDetails(post)"
+          class="hover:scale-105 transition-transform duration-200"
+        >
+          Details
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

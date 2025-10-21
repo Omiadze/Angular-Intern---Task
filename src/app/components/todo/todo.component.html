@@ -1,0 +1,34 @@
+<div class="p-4">
+  <h2 class="text-xl font-semibold mb-4">{{ userName }}'s Todo List</h2>
+
+  <nz-spin *ngIf="loading" class="w-full h-screen flex justify-center items-center"></nz-spin>
+
+  <nz-table
+    *ngIf="!loading"
+    #basicTable
+    [nzBordered]="true"
+    [nzData]="todos"
+    [nzPageSize]="10"
+    [nzFrontPagination]="true"
+    [nzShowPagination]="true"
+    nzShowSizeChanger="false"
+  >
+    <thead>
+      <tr>
+        <th>Task</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let todo of basicTable.data">
+        <td>{{ todo.title }}</td>
+        <td>
+          <nz-tag [nzColor]="todo.completed ? 'green' : 'red'">
+            {{ todo.completed ? 'Completed' : 'Pending' }}
+          </nz-tag>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
