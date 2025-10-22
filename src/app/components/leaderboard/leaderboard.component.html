@@ -1,38 +1,56 @@
 <div class="bg-white p-4 rounded shadow">
-  <h2 class="text-xl font-bold mb-4">Leaderboard</h2>
+  <h2 class="text-xl font-bold mb-4 text-center">Leaderboard</h2>
 
-  <div class="flex gap-2 mb-4">
+  <div class="flex gap-2 mb-4 justify-center items-center">
     <button
+      nz-button
+      [nzType]="activeFilter === week ? 'primary' : 'default'"
+      class="rounded-3xl! px-3 py-1 font-semibold"
       *ngFor="let week of weeks"
       (click)="filterWeek(week)"
-      [ngClass]="{
-        'bg-blue-500 text-white': activeFilter === week,
-        'bg-gray-200': activeFilter !== week,
-      }"
-      class="px-3 py-1 rounded font-semibold"
     >
       {{ week }}
     </button>
   </div>
 
-  <div class="overflow-auto max-h-96">
-    <table class="min-w-full text-left border">
-      <thead>
-        <tr>
-          <th class="border px-2 py-1">Place</th>
-          <th class="border px-2 py-1">Customer ID</th>
-          <th class="border px-2 py-1">Login Name</th>
-          <th class="border px-2 py-1">Week</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let entry of filteredList">
-          <td class="border px-2 py-1">{{ entry.place }}</td>
-          <td class="border px-2 py-1">{{ entry.customerId }}</td>
-          <td class="border px-2 py-1">{{ entry.loginName }}</td>
-          <td class="border px-2 py-1">{{ entry.week }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <!-- Scrollable Table Container -->
+  <nz-table
+    #leaderboardTable
+    [nzData]="filteredList"
+    [nzScroll]="{ y: '400px' }"
+    [nzBordered]="true"
+    class="rounded"
+  >
+    <thead>
+      <tr>
+        <th>Place</th>
+        <th>Avatar</th>
+        <th>Customer ID</th>
+        <th>Login Name</th>
+        <th>Week</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let entry of leaderboardTable.data"
+        [ngClass]="{
+          'bg-[#fde046] font-bold': entry.place === 1,
+          'bg-[#d1d5db] font-semibold': entry.place === 2,
+          'bg-[#fb923c] font-semibold': entry.place === 3,
+        }"
+      >
+        <td>{{ entry.place }}</td>
+        <td>
+          <img
+            [src]="entry.avatarUrl"
+            [alt]="entry.loginName"
+            class="w-8 h-8 rounded-full inline-block"
+          />
+        </td>
+        <td>{{ entry.customerId }}</td>
+        <td>{{ entry.loginName }}</td>
+        <td>{{ entry.week }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
 </div>

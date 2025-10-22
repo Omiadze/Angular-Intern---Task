@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 import { ApiService } from '@app/core/services/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-posts-list',
@@ -35,10 +36,20 @@ export class PostsListComponent implements OnInit {
   }
 
   openDetails(post: any): void {
-    this.modal.info({
+    const modalRef = this.modal.create({
       nzTitle: post.title,
-      nzContent: post.body,
-      nzOkText: 'Close',
+      nzContent: `<div style="white-space: pre-line; font-size: 16px;">${post.body}</div>`,
+      nzFooter: [
+        {
+          label: 'Close',
+          type: 'primary',
+          onClick: () => modalRef.destroy(),
+        },
+      ],
+      nzClosable: true,
+      nzMaskClosable: true,
+      nzWidth: 600,
+      nzBodyStyle: { padding: '20px' },
     });
   }
 }
