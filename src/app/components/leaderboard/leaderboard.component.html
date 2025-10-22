@@ -1,0 +1,38 @@
+<div class="bg-white p-4 rounded shadow">
+  <h2 class="text-xl font-bold mb-4">Leaderboard</h2>
+
+  <div class="flex gap-2 mb-4">
+    <button
+      *ngFor="let week of weeks"
+      (click)="filterWeek(week)"
+      [ngClass]="{
+        'bg-blue-500 text-white': activeFilter === week,
+        'bg-gray-200': activeFilter !== week,
+      }"
+      class="px-3 py-1 rounded font-semibold"
+    >
+      {{ week }}
+    </button>
+  </div>
+
+  <div class="overflow-auto max-h-96">
+    <table class="min-w-full text-left border">
+      <thead>
+        <tr>
+          <th class="border px-2 py-1">Place</th>
+          <th class="border px-2 py-1">Customer ID</th>
+          <th class="border px-2 py-1">Login Name</th>
+          <th class="border px-2 py-1">Week</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let entry of filteredList">
+          <td class="border px-2 py-1">{{ entry.place }}</td>
+          <td class="border px-2 py-1">{{ entry.customerId }}</td>
+          <td class="border px-2 py-1">{{ entry.loginName }}</td>
+          <td class="border px-2 py-1">{{ entry.week }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
