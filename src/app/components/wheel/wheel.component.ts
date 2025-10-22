@@ -1,40 +1,58 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common'; // <-- for ngStyle
-import { FormsModule } from '@angular/forms'; // <-- for ngModel
-import { NzButtonModule } from 'ng-zorro-antd/button'; // <-- for nz-button
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'app-wheel',
   standalone: true,
-  imports: [CommonModule, FormsModule, NzButtonModule], // <-- add modules here
+  imports: [CommonModule, FormsModule, NzButtonModule, NzAvatarModule, NzIconModule],
   templateUrl: './wheel.component.html',
+  styleUrls: [],
 })
 export class Wheel {
   @ViewChild('wheel') wheel!: ElementRef<HTMLDivElement>;
-  sectorInput = '';
-  errorMessage = '';
 
   sectors = Array.from({ length: 10 }, (_, i) => i + 1);
+  sectorInput = '';
+  errorMessage = '';
+  spinning = false;
 
   spinWheel() {
-    const targetSector = Number(this.sectorInput);
+    const targetPrizeNumber = Number(this.sectorInput);
+    const totalSectors = this.sectors.length;
 
-    if (!targetSector || targetSector < 1 || targetSector > 10) {
-      this.errorMessage = 'The specified sector could not be found';
+    if (
+      isNaN(targetPrizeNumber) ||
+      targetPrizeNumber < 1 ||
+      targetPrizeNumber > totalSectors ||
+      !Number.isInteger(targetPrizeNumber)
+    ) {
+      this.errorMessage = `Please enter a valid prize number (1-${totalSectors})`;
       return;
     }
 
     this.errorMessage = '';
+    if (!this.wheel) return;
 
-    const sectorAngle = 360 / this.sectors.length;
-    const targetAngle = 360 * 5 - (targetSector - 1) * sectorAngle - sectorAngle / 2; // 5 spins
-    this.wheel.nativeElement.style.transition = 'transform 3s ease-out';
-    this.wheel.nativeElement.style.transform = `rotate(${targetAngle}deg)`;
+    this.spinning = true;
 
-    // Reset after animation
+    const sectorAngle = 360 / totalSectors;
+    const spins = 5;
+    const targetPrizeIndex = targetPrizeNumber - 1;
+    const angleToCenterSector = targetPrizeIndex * sectorAngle + sectorAngle / 2;
+    const targetAngle = 360 * spins - angleToCenterSector;
+
+    const wheelEl = this.wheel.nativeElement;
+    wheelEl.style.transition = 'transform 3s ease-out';
+    wheelEl.style.transform = `rotate(${targetAngle}deg)`;
+
     setTimeout(() => {
-      this.wheel.nativeElement.style.transition = 'none';
-      this.wheel.nativeElement.style.transform = `rotate(${-(targetSector - 1) * sectorAngle - sectorAngle / 2}deg)`;
+      wheelEl.style.transition = 'none';
+      wheelEl.style.transform = `rotate(${-angleToCenterSector}deg)`;
+      this.spinning = false;
     }, 3000);
   }
 }

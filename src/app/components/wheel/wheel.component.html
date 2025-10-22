@@ -1,25 +1,60 @@
-<div class="flex flex-col items-center">
-  <div #wheel class="relative w-64 h-64 rounded-full border-4 border-gray-400 overflow-hidden">
-    <ng-container *ngFor="let sector of sectors; let i = index">
+<div class="flex flex-col items-center relative">
+  <div
+    class="absolute z-10 top-[-20px] left-1/2 -ml-2.5 w-0 h-0 border-l-[15px] border-r-[15px] border-b-[20px] border-l-transparent border-r-transparent border-b-yellow-500"
+  ></div>
+
+  <div
+    #wheel
+    class="relative w-[300px] h-[300px] rounded-full border-4 border-gray-400 overflow-hidden shadow-2xl transition-transform duration-300"
+    style="
+      transform: rotate(0deg);
+      background: conic-gradient(
+        #e3342f 0deg 36deg,
+        #1f2937 36deg 72deg,
+        #e3342f 72deg 108deg,
+        #1f2937 108deg 144deg,
+        #e3342f 144deg 180deg,
+        #1f2937 180deg 216deg,
+        #e3342f 216deg 252deg,
+        #1f2937 252deg 288deg,
+        #e3342f 288deg 324deg,
+        #1f2937 324deg 360deg
+      );
+    "
+  >
+    <ng-container *ngFor="let prize of sectors; let i = index">
       <div
-        class="absolute w-1/2 h-1/2 origin-bottom-left bg-blue-400/20 flex justify-center items-end text-white font-bold"
-        [ngStyle]="{
-          transform: 'rotate(' + i * 36 + 'deg) translate(0, -50%)',
-        }"
+        class="absolute w-full h-full flex justify-center items-start text-white font-extrabold text-lg pt-[20px] origin-center"
+        [style.transform]="'rotate(' + (i * 36 + 18) + 'deg)'"
       >
-        {{ sector }}
+        <span class="transform rotate-90 px-1 whitespace-nowrap text-xs pl-5"
+          >Prize {{ prize }}</span
+        >
       </div>
     </ng-container>
+
+    <div
+      class="absolute inset-0 m-auto w-10 h-10 rounded-full bg-white border-2 border-gray-500"
+    ></div>
   </div>
 
-  <div class="mt-6 flex flex-col items-center space-y-3">
+  <div class="mt-8 flex items-center space-y-3 gap-2">
     <input
       type="number"
       [(ngModel)]="sectorInput"
-      placeholder="Enter sector (1-10)"
-      class="p-2 border rounded w-40"
+      placeholder="Enter prize # (1-10)"
+      class="p-2 border rounded w-40 text-center"
+      [disabled]="spinning"
     />
-    <button nz-button nzType="primary" (click)="spinWheel()" class="w-40">Spin</button>
-    <p class="text-red-500 font-semibold">{{ errorMessage }}</p>
+    <button
+      nz-button
+      nzType="primary"
+      (click)="spinWheel()"
+      [disabled]="spinning"
+      class="rounded-3xl!"
+    >
+      <nz-icon nzType="sync" nzTheme="outline" />
+    </button>
   </div>
+  <p class="text-red-500 font-semibold h-5">{{ errorMessage }}</p>
 </div>
