@@ -6,11 +6,12 @@ import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 import { ApiService } from '@app/core/services/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'app-posts-list',
   standalone: true,
-  imports: [CommonModule, NzTableModule, NzButtonModule, NzModalModule, NzSpinModule],
+  imports: [CommonModule, NzTableModule, NzButtonModule, NzModalModule, NzSpinModule, NzIconModule],
   providers: [NzModalService],
   templateUrl: './posts-list.component.html',
   styleUrls: ['./posts-list.component.css'],

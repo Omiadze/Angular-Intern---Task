@@ -1,4 +1,9 @@
-<header class="flex justify-between items-center p-4 bg-blue-600 text-white">
-  <div class="text-xl font-bold cursor-pointer" (click)="goHome()">MySite</div>
-  <div>{{ now | date: 'medium' }}</div>
+<header class="flex justify-end items-center bg-gray-50 text-black p-0!">
+  <!-- <div class="text-xl font-bold cursor-pointer" (click)="goHome()">MySite</div> -->
+  <!-- <button nz-button nzType="primary"> -->
+  <div class="flex items-center justify-center gap-2 mr-10">
+    <nz-icon nzType="calendar" nzTheme="outline"></nz-icon>
+    <p class="text-black p-0! m-0!">{{ now | date: 'medium' }}</p>
+  </div>
+  <!-- </button> -->
 </header>
