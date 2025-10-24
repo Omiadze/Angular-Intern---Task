@@ -1,6 +1,10 @@
 <nz-layout class="min-h-screen">
   <!-- Sidebar -->
-  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" class="bg-[#151a22] text-white">
+  <nz-sider
+    nzCollapsible
+    [(nzCollapsed)]="isCollapsed"
+    class="bg-[#151a22] text-white min-h-screen"
+  >
     <div class="logo text-center py-4 text-lg font-semibold">MyApp</div>
 
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed" class="text-white">
