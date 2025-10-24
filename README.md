@@ -1,59 +1,78 @@
-# CrocoApp
+# 🌐 Angular User & Posts Dashboard
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.6.
+---
 
-## Development server
+## 🌟 Project Overview
 
-To start a local development server, run:
+An Angular web application built for practicing component-based architecture, routing, and API integration.
+The app displays users, posts, todos, and promotional features such as a spinning wheel and leaderboard — all using responsive design and modern Angular best practices.
 
-```bash
-ng serve
-```
+---
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🧭 Main Structure
 
-## Code scaffolding
+- **Header** – Displays site name (links to home) and current date & time.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Sidebar Navigation** – Links to Users, Posts, and Promotions pages.
 
-```bash
-ng generate component component-name
-```
+- **Main Content Area** – Shows data tables and interactive components.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- **Footer** – Simple footer for layout consistency.
 
-```bash
-ng generate --help
-```
+---
 
-## Building
+## 🖼 Screenshots
 
-To build the project run:
+### promotions
 
-```bash
-ng build
-```
+![Promotions](public/screenshots/promotions.png)
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Todos
 
-## Running unit tests
+![Todos](public/screenshots/todo.png)
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### Home / Users List
 
-```bash
-ng test
-```
+![Users List](public/screenshots/users.png)
 
-## Running end-to-end tests
+### Posts List
 
-For end-to-end (e2e) testing, run:
+![Posts List](public/screenshots/posts.png)
 
-```bash
-ng e2e
-```
+---
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## ⚡ Main Technologies Used
 
-## Additional Resources
+- **Angular** – Frontend framework
+- **TailwindCSS** – Styling framework
+- **Ant Design** – UI components
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+
+## ⚙️ Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Omiadze/Angular-Intern---Task.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd Angular-Intern---Task
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Start the development server:
+
+   ```bash
+   ng serve
+   ```
+
+# Live Site
+
+Access the live application at [app](https://startling-druid-775324.netlify.app/users).
+
+# Author
+
+Hi, my name is Teo and I am a front-end developer.
