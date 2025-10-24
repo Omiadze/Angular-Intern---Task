@@ -71,7 +71,7 @@ The app displays users, posts, todos, and promotional features such as a spinnin
 
 # Live Site
 
-Access the live application at [app](https://startling-druid-775324.netlify.app/users).
+Access the live application at [app](https://startling-druid-775324.netlify.app).
 
 # Author
 
