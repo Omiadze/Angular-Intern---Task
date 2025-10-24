@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import confetti from 'canvas-confetti';
 
 @Component({
   selector: 'app-wheel',
@@ -53,6 +54,35 @@ export class Wheel {
       wheelEl.style.transition = 'none';
       wheelEl.style.transform = `rotate(${-angleToCenterSector}deg)`;
       this.spinning = false;
+
+      this.launchConfetti();
     }, 3000);
+  }
+
+  // Confetti animation
+  launchConfetti() {
+    const duration = 2 * 1000;
+    const end = Date.now() + duration;
+
+    const frame = () => {
+      confetti({
+        particleCount: 5,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0 },
+      });
+      confetti({
+        particleCount: 5,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1 },
+      });
+
+      if (Date.now() < end) {
+        requestAnimationFrame(frame);
+      }
+    };
+
+    frame();
   }
 }
