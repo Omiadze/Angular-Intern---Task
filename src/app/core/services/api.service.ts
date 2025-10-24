@@ -2,6 +2,50 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin, map } from 'rxjs';
 
+// types
+export interface Company {
+  name: string;
+  catchPhrase: string;
+  bs: string;
+}
+
+export interface Address {
+  street: string;
+  suite: string;
+  city: string;
+  zipcode: string;
+  geo: {
+    lat: string;
+    lng: string;
+  };
+}
+
+export interface User {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  address: Address;
+  phone: string;
+  website: string;
+  company: Company;
+}
+
+export interface Post {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+  userName?: string;
+}
+
+export interface Todo {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -11,16 +55,15 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  getUsers(): Observable<any[]> {
-    return this.http.get<any[]>(this.USERS_URL);
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.USERS_URL);
   }
 
-  getPosts(): Observable<any[]> {
-    return this.http.get<any[]>(this.POSTS_URL);
+  getPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(this.POSTS_URL);
   }
 
-  // Get posts with user name
-  getPostsWithUserName(): Observable<any[]> {
+  getPostsWithUserName(): Observable<Post[]> {
     return forkJoin({
       users: this.getUsers(),
       posts: this.getPosts(),

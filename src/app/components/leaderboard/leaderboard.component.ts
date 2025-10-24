@@ -11,7 +11,6 @@ interface LeaderboardEntry {
   loginName: string;
   place: number;
   week: WeekType;
-  // --- ADDED FIELD ---
   avatarUrl: string;
 }
 
@@ -32,24 +31,21 @@ export class Leaderboard implements OnInit {
     this.filteredList = this.leaderboard;
   }
 
-  // Helper function to generate the DiceBear URL
+  // generate the DiceBear URL
   private generateAvatarUrl(seed: string): string {
-    // We'll use the 'adventurer' style for a nice, colorful avatar.
-    // The size is set to 32 pixels.
     return `https://api.dicebear.com/7.x/adventurer/svg?seed=${seed}&size=32`;
   }
 
   generateLeaderboard() {
     const weekOptions: WeekType[] = ['I', 'II', 'III', 'IV'];
     this.leaderboard = Array.from({ length: 40 }, (_, i) => {
-      const loginName = 'user' + Math.floor(Math.random() * 1000) + (i < 10 ? 'a' : 'b'); // Ensure unique names
+      const loginName = 'user' + Math.floor(Math.random() * 1000) + (i < 10 ? 'a' : 'b');
 
       return {
         customerId: Math.floor(Math.random() * 10000),
         loginName: loginName,
         place: i + 1,
         week: weekOptions[Math.floor(Math.random() * 4)],
-        // --- ADDED FIELD GENERATION ---
         avatarUrl: this.generateAvatarUrl(loginName),
       };
     });

@@ -41,7 +41,6 @@ export class UsersTableComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // Load users
     this.api.getUsers().subscribe((u) => {
       this.users = u;
       this.filteredUsers = u;

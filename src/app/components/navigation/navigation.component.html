@@ -1,5 +1,4 @@
 <nz-layout class="min-h-screen">
-  <!-- Sidebar -->
   <nz-sider
     nzCollapsible
     [(nzCollapsed)]="isCollapsed"
@@ -29,19 +28,15 @@
     </ul>
   </nz-sider>
 
-  <!-- Main content -->
   <nz-layout class="flex flex-col min-h-screen">
-    <!-- Header -->
     <nz-header class="bg-blue-600 p-0!">
       <app-header></app-header>
     </nz-header>
 
-    <!-- Content -->
     <nz-content class="flex-1 overflow-y-auto p-6 bg-gray-50">
       <router-outlet></router-outlet>
     </nz-content>
 
-    <!-- Footer -->
     <nz-footer class="text-center bg-gray-100 py-4"> © {{ currentYear }} — croco-app </nz-footer>
   </nz-layout>
 </nz-layout>
